@@ -332,6 +332,14 @@ h2.title{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1
 @keyframes sbCrowd{from{transform:translateX(-3px)}to{transform:translateX(3px)}}
 @keyframes sbStar{from{opacity:.15}to{opacity:1}}
 @keyframes sbPull{from{transform:scale(1.14)}to{transform:scale(1)}}
+:is(.s4.active,.mframe,.hp) .a-knife{transform-origin:100% 100%;animation:sbChop .34s ease-in infinite alternate}
+:is(.s4.active,.mframe,.hp) .a-give{animation:sbGive 4.6s ease-in-out infinite}
+@keyframes sbGive{0%,100%{transform:none}45%,60%{transform:translateX(9px)}}
+:is(.s4.active,.mframe,.hp) .a-spark{animation:sbSpark 2.2s ease-out var(--dl) infinite}
+:is(.s4.active,.mframe,.hp) .a-puff{animation:sbPuff 5s ease-in-out var(--dl) infinite}
+@keyframes sbChop{from{transform:translateY(-6px) rotate(-10deg)}to{transform:none}}
+@keyframes sbSpark{0%{opacity:0;transform:none}15%{opacity:1}100%{opacity:0;transform:translate(var(--tx,4px),-36px)}}
+@keyframes sbPuff{0%{opacity:0;transform:translateY(10px) scale(.8)}40%{opacity:1}100%{opacity:0;transform:translateY(-22px) scale(1.25)}}
 .head-act{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
 .playbtn{display:inline-flex;align-items:center;gap:.5em;font-size:.9rem;padding:.45em 1.15em;border-radius:999px;border:1px solid var(--amber);background:rgba(217,164,65,.16);color:var(--cream);cursor:pointer;transition:background .2s,transform .2s}
 .playbtn:hover{background:rgba(217,164,65,.3)}
@@ -389,11 +397,20 @@ h2.title{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1
 <body>
 <svg id="defs" aria-hidden="true" focusable="false">
   <defs>
-    <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2230"/><stop offset=".6" stop-color="#7a4430"/><stop offset="1" stop-color="#D97838"/></linearGradient>
-    <linearGradient id="skyNight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#09090d"/><stop offset="1" stop-color="#231a1d"/></linearGradient>
-    <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f7178"/><stop offset="1" stop-color="#9a958d"/></linearGradient>
-    <radialGradient id="glow"><stop offset="0" stop-color="#F4C66A" stop-opacity=".95"/><stop offset=".35" stop-color="#D97838" stop-opacity=".45"/><stop offset="1" stop-color="#D97838" stop-opacity="0"/></radialGradient>
-    <radialGradient id="glowSoft"><stop offset="0" stop-color="#D9A441" stop-opacity=".55"/><stop offset="1" stop-color="#D9A441" stop-opacity="0"/></radialGradient>
+    <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171527"/><stop offset=".3" stop-color="#3a2638"/><stop offset=".5" stop-color="#8a4636"/><stop offset=".6" stop-color="#D97838"/><stop offset=".66" stop-color="#F0B66C"/><stop offset="1" stop-color="#F0B66C"/></linearGradient>
+    <linearGradient id="skyNight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07070b"/><stop offset=".6" stop-color="#15111a"/><stop offset="1" stop-color="#2a1b1c"/></linearGradient>
+    <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b7d84"/><stop offset="1" stop-color="#aaa59d"/></linearGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="#F8D287" stop-opacity=".95"/><stop offset=".3" stop-color="#E08A45" stop-opacity=".5"/><stop offset="1" stop-color="#D97838" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowSoft"><stop offset="0" stop-color="#E9B455" stop-opacity=".6"/><stop offset="1" stop-color="#D9A441" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bulbGrad" cx=".5" cy=".6" r=".6"><stop offset="0" stop-color="#FFFCEE"/><stop offset=".55" stop-color="#FFDD93"/><stop offset="1" stop-color="#DE963C"/></radialGradient>
+    <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".62"/></radialGradient>
+    <linearGradient id="stallLit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9B8"/><stop offset=".55" stop-color="#EBA650"/><stop offset="1" stop-color="#B25C2A"/></linearGradient>
+    <linearGradient id="roadSheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9713B"/><stop offset=".3" stop-color="#4a2f2c"/><stop offset="1" stop-color="#1a171c"/></linearGradient>
+    <linearGradient id="roadGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9A24E" stop-opacity=".6"/><stop offset=".75" stop-color="#E9A24E" stop-opacity="0"/></linearGradient>
+    <linearGradient id="hazeH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D97838" stop-opacity="0"/><stop offset=".5" stop-color="#E08A45" stop-opacity=".32"/><stop offset="1" stop-color="#D97838" stop-opacity="0"/></linearGradient>
+    <linearGradient id="wokGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3c3339"/><stop offset=".6" stop-color="#1b171b"/><stop offset="1" stop-color="#3a2219"/></linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a4f52"/><stop offset="1" stop-color="#2a2428"/></linearGradient>
+    <filter id="bl3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.4"/></filter>
   </defs>
 </svg>
 
@@ -665,9 +682,37 @@ function rng(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 
 /* ---------- SVG 繪圖元件 ---------- */
-function person(x,y,s,fill,op){
-  return '<g transform="translate('+x+' '+y+') scale('+s+')" fill="'+(fill||'#0d0c10')+'" opacity="'+(op==null?1:op)+'"><circle cx="0" cy="-27" r="4.2"/><path d="M-5.5 -21.5Q0 -23.5 5.5 -21.5L7 -9 4 -9 3.4 0H.8L0-8-.8 0H-3.4L-4-9H-7Z"/></g>';
+function person(x,y,s,fill,op,walk,rim){
+  var legs=walk?'M-3.9-15L-6.4 0H-3.4L-.3-11 2.8 0H5.8L3.9-15Z':'M-3.9-15L-4.4 0H-1.2L0-11.5 1.2 0H4.4L3.9-15Z';
+  return '<g transform="translate('+x+' '+y+') scale('+s+')" fill="'+(fill||'#0b0a0e')+'"'+(op==null?'':' opacity="'+op+'"')+(rim?' stroke="'+A+'" stroke-opacity=".5" stroke-width=".45" paint-order="stroke"':'')+'><circle cx="0" cy="-35.3" r="3.7"/><path d="M-5.6-29.6C-5.6-31.5-3-32 0-32S5.6-31.5 5.6-29.6L6.6-17.4C6.7-16.3 4.9-16.2 4.8-17.3L4.1-25V-14.5H-4.1V-25L-4.8-17.3C-4.9-16.2-6.7-16.3-6.6-17.4Z"/><path d="'+legs+'"/></g>';
 }
+/* 攤位元件：60×60，原點在左下角 */
+function stall(o){o=o||{};var lit=o.lit==null?1:o.lit,day=o.day,s='',k;
+  var dk=day?'#4d4c51':'#0d0b10',md=day?'#66656a':'#1d181e',c1=day?'#8c8a8c':(o.c1||O),c2=day?'#a9a6a3':(o.c2||C),so=day?1:(.35+.6*lit);
+  if(lit&&!day)s+='<ellipse cx="30" cy="3" rx="46" ry="7" fill="url(#glowSoft)" opacity="'+(.9*lit).toFixed(2)+'"/>';
+  s+='<rect x="3" y="-46" width="54" height="30" fill="'+(day?'#5a595e':'#0a090c')+'"/>';
+  if(day){for(k=1;k<6;k++)s+='<line x1="3" y1="'+(-46+k*5)+'" x2="57" y2="'+(-46+k*5)+'" stroke="#48474c" stroke-width=".8"/>';}
+  else{
+    if(lit)s+='<rect x="3" y="-46" width="54" height="30" fill="url(#stallLit)" opacity="'+lit+'"/>';
+    s+='<path d="M8-18v-7h4v-3h3v3h3v7zM25-18v-5q5-4 10 0v5zM40-18v-9h3v-3h2v3h3v9zM50-18v-4h5v4z" fill="'+dk+'"/>';
+    if(o.vendor)s+='<circle cx="22" cy="-33.5" r="3.4" fill="'+dk+'"/><path d="M15.5-18v-7q0-4.5 6.5-4.5t6.5 4.5v7z" fill="'+dk+'"/>';
+  }
+  s+='<rect x="1" y="-58" width="2.2" height="58" fill="'+dk+'"/><rect x="56.8" y="-58" width="2.2" height="58" fill="'+dk+'"/>';
+  s+='<rect x="0" y="-18" width="60" height="18" fill="'+md+'"/><rect x="0" y="-18" width="60" height="1.5" fill="'+(day?'#7d7c80':A)+'" opacity="'+(day?1:(.25+.7*lit).toFixed(2))+'"/>';
+  s+='<path d="M-4-44L2-60H58L64-44Z" fill="'+(day?'#737276':'#241b1f')+'"/>';
+  for(k=0;k<7;k++){var a=2+8*k,b=-4+68/7*k;s+='<path d="M'+a+'-60h8L'+(b+68/7).toFixed(1)+'-44H'+b.toFixed(1)+'Z" fill="'+(k%2?c2:c1)+'" opacity="'+(so*(k%2?.8:.95)).toFixed(2)+'"/>';}
+  s+='<rect x="-4" y="-44" width="68" height="3" fill="'+(day?'#5e5d61':'#120e12')+'" opacity=".85"/>';
+  if(!day){var bulb='<circle cx="30" cy="-39" r="9" fill="url(#glow)" opacity="'+(lit?.9:.3)+'"/><circle cx="30" cy="-39" r="1.8" fill="#FFF1CC"/>';
+    s+=o.lamp?'<g class="'+o.lamp+'" style="--dl:'+(o.dl||0)+'s">'+bulb+'</g>':(lit?bulb:'');}
+  return s;}
+var TS=[.19,.29,.44,.66,1];
+/* 一點透視的兩排攤位 */
+function rows(vx,vy,dy,half,sc0,ts,fn){var s='';ts.forEach(function(t,k){var sc=sc0*t,y=(vy+dy*t).toFixed(1);
+  s+='<g transform="translate('+(vx-half*t-60*sc).toFixed(1)+' '+y+') scale('+sc.toFixed(3)+')">'+stall(fn(k,0))+'</g>';
+  s+='<g transform="translate('+(vx+half*t+60*sc).toFixed(1)+' '+y+') scale('+(-sc).toFixed(3)+' '+sc.toFixed(3)+')">'+stall(fn(k,1))+'</g>';});return s;}
+function bokeh(seed,n,x0,x1,y0,y1,r0,r1,anim){var r=rng(seed),s='<g filter="url(#bl3)">';
+  for(var i=0;i<n;i++){s+='<circle'+(anim?' class="a-bk" style="--dl:-'+(r()*4).toFixed(1)+'s;--du:'+(1.8+r()*2.6).toFixed(1)+'s"':'')+' cx="'+(x0+r()*(x1-x0)).toFixed(1)+'" cy="'+(y0+r()*(y1-y0)).toFixed(1)+'" r="'+(r0+r()*(r1-r0)).toFixed(1)+'" fill="'+(r()>.5?A:O)+'" opacity="'+(.14+r()*.3).toFixed(2)+'"/>';}
+  return s+'</g>';}
 function lights(x1,x2,y,sag,n,r,op,seq){
   var s='<path d="M'+x1+' '+y+' Q'+((x1+x2)/2)+' '+(y+sag*2)+' '+x2+' '+y+'" stroke="'+C+'" stroke-opacity=".25" fill="none" stroke-width=".6"/>';
   for(var i=1;i<n;i++){var t=i/n,px=x1+(x2-x1)*t,py=y+sag*2*2*t*(1-t);
@@ -675,9 +720,9 @@ function lights(x1,x2,y,sag,n,r,op,seq){
     s+=seq==null?bulb:'<g class="b" style="--i:'+(seq+i)+'">'+bulb+'</g>';}
   return s;
 }
-function thirds(){return '<g stroke="'+C+'" stroke-opacity=".09" stroke-width=".5" stroke-dasharray="2 3"><line x1="106.7" y1="0" x2="106.7" y2="180"/><line x1="213.3" y1="0" x2="213.3" y2="180"/><line x1="0" y1="60" x2="320" y2="60"/><line x1="0" y1="120" x2="320" y2="120"/></g>';}
+function thirds(){return '<g stroke="'+C+'" stroke-opacity=".06" stroke-width=".5" stroke-dasharray="2 3"><line x1="106.7" y1="0" x2="106.7" y2="180"/><line x1="213.3" y1="0" x2="213.3" y2="180"/><line x1="0" y1="60" x2="320" y2="60"/><line x1="0" y1="120" x2="320" y2="120"/></g>';}
 function frame(body,label){
-  return '<svg class="sb" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="'+label+'（分鏡示意）">'+body+thirds()+
+  return '<svg class="sb" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="'+label+'（分鏡示意）">'+body+'<rect width="320" height="180" fill="url(#vig)"/>'+thirds()+
   '<rect x="236" y="164" width="78" height="12" rx="6" fill="#101014" opacity=".7"/><text x="275" y="173" text-anchor="middle" font-size="7.5" fill="'+C+'" fill-opacity=".8" font-family="sans-serif" letter-spacing="1">分鏡示意</text></svg>';
 }
 
@@ -688,80 +733,128 @@ var shots=[
  {t:'招牌與攤位燈光亮起',lens:'特寫',goal:'呈現時間與光線變化。',ph:'起｜傍晚'},
  {t:'攤販烹調食物',lens:'近景',goal:'捕捉動作與生活細節。',ph:'承轉｜入夜'},
  {t:'顧客穿梭在攤位之間',lens:'全景',goal:'呈現夜市的空間與人潮。',ph:'承轉｜入夜'},
- {t:'顧客與攤販交易的雙手',lens:'特寫',goal:'強調人物互動。',ph:'承轉｜入夜'},
+ {t:'攤販把餐點遞給顧客',lens:'中景',goal:'強調人物互動。',ph:'承轉｜入夜'},
  {t:'夜晚熱鬧的人群與燈火',lens:'遠景',goal:'呈現故事高潮。',ph:'合｜夜晚'},
  {t:'從遠處回望夜市街道',lens:'遠景',goal:'形成故事結尾。',ph:'合｜夜晚'}
 ];
 var draw=[
- function(){ // 01 遠景 入口：燈逐一亮起、行人走進夜市
-  var s='<rect width="320" height="112" fill="url(#skyDusk)"/><circle class="a-breath" cx="262" cy="106" r="46" fill="url(#glow)" opacity=".5"/><rect y="110" width="320" height="70" fill="#19171c"/>';
-  s+='<path d="M0 40L70 62V128L0 150Z" fill="#1d1a20"/><path d="M320 40L250 62V128L320 150Z" fill="#1d1a20"/>';
-  s+='<path d="M96 180L152 110H168L224 180Z" fill="#26232a"/><path d="M160 112V180" stroke="'+C+'" stroke-opacity=".2" stroke-dasharray="4 5"/>';
-  for(var i=0;i<4;i++){var k=i*14;s+='<path d="M'+(10+k*1.6)+' '+(72+k*.6)+'h26l6 6h-38z" fill="#2b2730" stroke="'+A+'" stroke-opacity=".35" stroke-width=".5"/><path d="M'+(310-k*1.6)+' '+(72+k*.6)+'h-26l-6 6h38z" fill="#2b2730" stroke="'+A+'" stroke-opacity=".35" stroke-width=".5"/>';}
-  s+='<rect x="117" y="60" width="5" height="52" fill="#141217"/><rect x="198" y="60" width="5" height="52" fill="#141217"/><rect x="108" y="54" width="104" height="9" rx="1" fill="#2a2630" stroke="'+A+'" stroke-opacity=".6" stroke-width=".7"/><rect x="138" y="44" width="44" height="10" fill="none" stroke="'+A+'" stroke-opacity=".7" stroke-width=".7"/>';
-  [[120,66],[200,66],[60,84],[262,84]].forEach(function(p,k){s+='<g class="a-lampon" style="--dl:'+(k*.6)+'s"><circle cx="'+p[0]+'" cy="'+p[1]+'" r="7" fill="url(#glowSoft)"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.5" fill="#FFE2A3" opacity=".8"/></g>'});
-  s+='<g class="a-walkin" style="--dl:0s;--tx:4px">'+person(150,128,.55)+'</g><g class="a-walkin" style="--dl:-2.7s;--tx:-6px">'+person(172,124,.45)+'</g><g class="a-walkin" style="--dl:-5.4s;--tx:9px">'+person(140,140,.7)+'</g>';
+ function(){ // 01 遠景 傍晚入口：夕陽逆光、燈逐一亮起、行人走進夜市
+  var s='<rect width="320" height="180" fill="url(#skyDusk)"/>';
+  s+='<circle class="a-breath" cx="160" cy="102" r="76" fill="url(#glow)" opacity=".8"/><circle cx="160" cy="101" r="12" fill="#FFE6B5"/>';
+  s+='<path d="M0 106V93h14v-6h10v8h18v-12h8v10h22v-5h12v9h20v-13h6v11h18v-6h14v8h26v-10h9v7h20v-12h7v14h24v-8h12v6h22v-10h10v12h18H320V106Z" fill="#4e2a33"/>';
+  s+='<rect y="104" width="320" height="76" fill="#151217"/><path d="M58 180L150 104h20L262 180Z" fill="url(#roadSheen)"/><rect y="84" width="320" height="44" fill="url(#hazeH)"/>';
+  s+='<path d="M0 20Q90 50 160 52T320 18M0 30Q90 58 160 58T320 28" fill="none" stroke="#120f14" stroke-width=".8"/>';
+  var mk=function(k,side){return {lit:.3,vendor:(k+side)%2,lamp:'a-lampon',dl:((k*2+side)*.45).toFixed(2)}};
+  s+=rows(160,104,72,92,1.3,TS.slice(0,3),mk);
+  s+='<g fill="#100d12" stroke="'+A+'" stroke-opacity=".45" stroke-width=".6"><rect x="106" y="62" width="5" height="78"/><rect x="209" y="62" width="5" height="78"/><rect x="98" y="56" width="124" height="9"/><path d="M94 56L104 49H216L226 56Z"/><rect x="140" y="38" width="40" height="11"/></g>';
+  [130,160,190].forEach(function(x,k){s+='<path d="M'+x+' 65v4" stroke="#100d12" stroke-width=".8"/><g class="a-lampon" style="--dl:'+(k*.7+.3)+'s"><circle cx="'+x+'" cy="73" r="9" fill="url(#glowSoft)"/><ellipse cx="'+x+'" cy="73" rx="3.4" ry="4.2" fill="'+O+'"/></g>'});
+  s+=rows(160,104,72,92,1.3,TS.slice(3),function(k,side){return mk(k+3,side)});
+  [[150,150,.72,0,4],[174,138,.55,-2.7,-5],[136,166,.95,-5.4,9]].forEach(function(w){var x=w[0],y=w[1],c=w[2];
+    s+='<g class="a-walkin" style="--dl:'+w[3]+'s;--tx:'+w[4]+'px"><path d="M'+(x-3*c)+' '+y+'h'+(6*c)+'l'+(4*c)+' '+(34*c)+'h'+(-14*c)+'z" fill="#000" opacity=".28"/>'+person(x,y,c,'#0b090d',null,true)+'</g>'});
   return s;},
- function(){ // 02 中景 攤販準備：手臂整理、燈泡輕晃、食材擺上
-  var s='<rect width="320" height="180" fill="#1d1a1f"/><rect width="320" height="180" fill="url(#skyDusk)" opacity=".22"/>';
-  s+='<rect width="320" height="26" fill="#2a262d"/><path d="M0 26'; for(var i=0;i<16;i++)s+=' q10 9 20 0'; s+='V20H0Z" fill="#2a262d" stroke="'+A+'" stroke-opacity=".5" stroke-width=".7"/>';
-  s+='<g class="a-sway"><line x1="230" y1="26" x2="230" y2="44" stroke="'+C+'" stroke-opacity=".4"/><circle cx="230" cy="49" r="5" fill="none" stroke="'+C+'" stroke-opacity=".6"/></g>';
-  s+='<g transform="translate(190 128) scale(2.9)" fill="#0f0e12"><circle cx="0" cy="-27" r="4.4"/><path d="M-6 -21.5Q0 -24 6 -21.5L7.5 -7H-7.5Z"/><path class="a-arm" d="M-6 -18L-14 -9 -12 -7.5 -4 -15Z"/></g>';
-  s+='<rect x="14" y="118" width="292" height="62" fill="#2c2830" stroke="'+C+'" stroke-opacity=".18"/><rect x="14" y="118" width="292" height="5" fill="'+A+'" opacity=".25"/>';
-  s+='<rect x="34" y="102" width="40" height="16" rx="2" fill="#3a343b" stroke="'+C+'" stroke-opacity=".35"/><rect x="82" y="106" width="46" height="12" rx="2" fill="#3a343b" stroke="'+C+'" stroke-opacity=".35"/><ellipse cx="54" cy="102" rx="18" ry="3" fill="#4a3b2c"/>';
-  [[98,104,O,.75],[106,103,A,.7],[114,104,O,.6]].forEach(function(c,k){s+='<g class="a-pop" style="--dl:'+(k*.45)+'s"><circle cx="'+c[0]+'" cy="'+c[1]+'" r="3" fill="'+c[2]+'" opacity="'+c[3]+'"/></g>'});
-  s+='<g class="a-knife"><path d="M250 114l34-6" stroke="'+C+'" stroke-opacity=".6" stroke-width="2"/><rect x="242" y="111" width="10" height="5" fill="#4a3b2c"/></g>';
+ function(){ // 02 中景 攤販準備：手臂整理、切菜、燈泡輕晃
+  var s='<rect width="320" height="180" fill="url(#skyDusk)"/><circle class="a-breath" cx="70" cy="112" r="96" fill="url(#glow)" opacity=".7"/>',k;
+  s+='<path d="M0 124V100h20v-8h14v10h24v-14h10v12h30v-6h16v8h28v-12h12v10h34v-7h18v9h26v-13h10v11h30v-6h18v8h30V124Z" fill="#43252e"/>';
+  s+='<rect width="320" height="30" fill="#221a1d"/>';
+  for(k=0;k<16;k++)s+='<rect x="'+k*20+'" width="20" height="30" fill="'+(k%2?C:O)+'" opacity="'+(k%2?.42:.62)+'"/>';
+  s+='<path d="M0 30';for(k=0;k<16;k++)s+='q10 10 20 0';s+='V26H0Z" fill="#B55F2C"/><rect y="26" width="320" height="1.2" fill="#1a1215" opacity=".6"/>';
+  s+='<rect x="4" width="7" height="180" fill="#0c0a0e"/><rect x="309" width="7" height="180" fill="#0c0a0e"/>';
+  s+='<path d="M92 34V50" stroke="#0c0a0e" stroke-width="1.2"/><g class="a-lampon" style="--dl:0s"><circle cx="92" cy="58" r="28" fill="url(#glow)" opacity=".9"/><circle cx="92" cy="58" r="6" fill="#FFF1CC"/></g><rect x="89" y="48" width="6" height="5" fill="#2a2429"/>';
+  s+='<g class="a-sway"><path d="M246 34V52" stroke="#0c0a0e" stroke-width="1.2"/><rect x="243" y="50" width="6" height="5" fill="#2a2429"/><circle cx="246" cy="61" r="6" fill="#3a3035" stroke="'+C+'" stroke-opacity=".5"/></g>';
+  s+='<g fill="#0d0b10" stroke="'+A+'" stroke-opacity=".55" stroke-width="1.2" paint-order="stroke"><path d="M166 124C166 100 172 88 186 85L206 85C220 88 226 100 226 124Z"/><circle cx="196" cy="68" r="13"/><path d="M182 63Q196 49 210 63L214 66H180Z"/></g>';
+  s+='<path class="a-arm" d="M174 94L150 118" stroke="#0d0b10" stroke-width="10" stroke-linecap="round"/><path d="M218 94L240 114" stroke="#0d0b10" stroke-width="10" stroke-linecap="round"/>';
+  s+='<rect y="124" width="320" height="56" fill="#17131a"/><rect y="120" width="320" height="6" fill="url(#steel)"/><rect y="120" width="320" height="1.2" fill="'+A+'" opacity=".7"/>';
+  for(k=1;k<8;k++)s+='<path d="M'+k*40+' 128V180" stroke="#100d12" stroke-width="1"/>';
+  s+='<path d="M22 120V104q0-3 2-4v-6h4v6q2 1 2 4v16zM34 120V108q0-3 2-4v-5h4v5q2 1 2 4v12zM46 120v-18q0-3 2-4v-7h4v7q2 1 2 4v18z" fill="#0d0b10"/>';
+  s+='<g fill="#2a2227" stroke="'+A+'" stroke-opacity=".4" stroke-width=".7"><rect x="66" y="110" width="44" height="10" rx="2"/><rect x="68" y="100" width="40" height="10" rx="2"/><path d="M70 100q18-12 36 0z"/></g>';
+  s+='<rect x="118" y="113" width="40" height="7" rx="2" fill="#2e262b" stroke="'+C+'" stroke-opacity=".3" stroke-width=".6"/>';
+  [[126,110,O],[137,109,A],[148,110,O]].forEach(function(c,k){s+='<g class="a-pop" style="--dl:'+(k*.45)+'s"><circle cx="'+c[0]+'" cy="'+c[1]+'" r="4" fill="'+c[2]+'"/></g>'});
+  s+='<rect x="232" y="116" width="54" height="4" rx="1.5" fill="#5a3f2c"/><g class="a-knife"><path d="M240 115h26l-4-9h-22z" fill="'+C+'" opacity=".8"/><rect x="266" y="108" width="13" height="4" rx="2" fill="#2a2024"/></g>';
   return s;},
- function(){ // 03 特寫 招牌燈光：燈泡閃爍點亮、招牌依序亮起
-  var s='<rect width="320" height="180" fill="#111015"/><circle class="a-glow" cx="250" cy="74" r="96" fill="url(#glow)" opacity=".55"/>';
-  s+='<rect x="26" y="34" width="170" height="104" rx="5" fill="#1e1b22" stroke="'+A+'" stroke-width="1.2"/><rect x="34" y="42" width="154" height="88" rx="3" fill="none" stroke="'+A+'" stroke-opacity=".35"/>';
-  s+='<g fill="'+A+'">'+[50,95,140].map(function(x,k){return '<rect class="a-signon" style="--dl:'+(k*.35)+'s" x="'+x+'" y="60" width="32" height="34" rx="3" opacity=".8"/>'}).join('')+'</g><rect x="56" y="104" width="110" height="5" rx="2.5" fill="'+C+'" opacity=".35"/>';
-  s+='<line x1="250" y1="0" x2="250" y2="44" stroke="'+C+'" stroke-opacity=".5"/><rect x="243" y="44" width="14" height="12" rx="2" fill="#3a343b"/><g class="a-flick"><circle cx="250" cy="70" r="15" fill="#FFE9B8"/><circle cx="250" cy="70" r="15" fill="none" stroke="'+A+'" stroke-width="2"/></g>';
-  var rays='';for(var i=0;i<10;i++){var a=i/10*Math.PI*2,r1=24,r2=40+(i%2)*10;rays+='<line x1="'+(250+Math.cos(a)*r1).toFixed(1)+'" y1="'+(70+Math.sin(a)*r1).toFixed(1)+'" x2="'+(250+Math.cos(a)*r2).toFixed(1)+'" y2="'+(70+Math.sin(a)*r2).toFixed(1)+'" stroke="'+A+'" stroke-opacity=".45" stroke-width="1"/>';}
-  s+='<g class="a-rays">'+rays+'</g>';
+ function(){ // 03 特寫 招牌與燈：燈泡閃爍點亮、直式招牌依序亮起
+  var s='<rect width="320" height="180" fill="#0d0c11"/>'+bokeh(31,8,120,320,0,180,7,18,true),k;
+  s+='<ellipse cx="82" cy="90" rx="90" ry="120" fill="url(#glowSoft)" opacity=".7"/>';
+  s+='<rect x="46" y="-8" width="72" height="196" rx="6" fill="#17131a" stroke="'+A+'" stroke-width="1.6"/>';
+  [12,68,124].forEach(function(y,k){var ic=k==0?'<circle cx="82" cy="'+(y+22)+'" r="10" fill="none" stroke="#4a2410" stroke-width="5"/>':k==1?'<path d="M82 '+(y+10)+'L95 '+(y+33)+'H69Z" fill="none" stroke="#4a2410" stroke-width="5" stroke-linejoin="round"/>':'<path d="M68 '+(y+22)+'h.1M82 '+(y+22)+'h.1M96 '+(y+22)+'h.1" stroke="#4a2410" stroke-width="8" stroke-linecap="round"/>';
+    s+='<g class="a-signon" style="--dl:'+(k*.4)+'s"><rect x="58" y="'+y+'" width="48" height="44" rx="4" fill="url(#stallLit)"/>'+ic+'</g>'});
+  for(k=0;k<12;k++){s+='<circle class="lt" style="--k:'+k+'" cx="51" cy="'+(4+k*16)+'" r="1.5" fill="#FFE2A3"/><circle class="lt" style="--k:'+(k+5)+'" cx="113" cy="'+(4+k*16)+'" r="1.5" fill="#FFE2A3"/>';}
+  s+='<circle class="a-glow" cx="232" cy="88" r="94" fill="url(#glow)" opacity=".65"/>';
+  var rays='';for(k=0;k<12;k++){var a=k/12*Math.PI*2,r1=34,r2=46+(k%2)*12;rays+='<path d="M'+(232+Math.cos(a)*r1).toFixed(1)+' '+(88+Math.sin(a)*r1).toFixed(1)+'L'+(232+Math.cos(a)*r2).toFixed(1)+' '+(88+Math.sin(a)*r2).toFixed(1)+'"/>';}
+  s+='<g class="a-rays" stroke="'+A+'" stroke-opacity=".32" stroke-width="1" stroke-linecap="round">'+rays+'</g>';
+  s+='<path d="M232 0V44" stroke="#2a252b" stroke-width="2"/><rect x="223" y="44" width="18" height="16" rx="2.5" fill="#2e282e"/><path d="M223 49h18M223 54h18" stroke="#17131a" stroke-width="1"/>';
+  s+='<g class="a-flick"><path d="M224 60h16l2 8a24 24 0 1 1-20 0z" fill="url(#bulbGrad)"/><path d="M229 60v18M235 60v18" stroke="#C98A3A" stroke-width=".8"/><path d="M226 86l3-8 3 8 3-8 3 8" fill="none" stroke="#FFFDF3" stroke-width="1.5" stroke-linejoin="round"/><path d="M215 86a18 18 0 0 1 7-13" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2" stroke-linecap="round"/></g>';
   return s;},
- function(){ // 04 近景 烹調：火焰跳動、鍋鏟翻炒、蒸氣上升
-  var s='<rect width="320" height="180" fill="#141217"/><ellipse class="a-breath" cx="160" cy="176" rx="150" ry="40" fill="url(#glow)" opacity=".7"/>';
-  s+='<path class="a-flame" style="--du:.7s" d="M120 160q8-22 16 0" fill="'+O+'" opacity=".85"/><path class="a-flame" style="--du:.9s" d="M150 166q10-30 20 0" fill="'+O+'" opacity=".85"/><path class="a-flame" style="--du:.6s" d="M182 162q8-22 16 0" fill="'+O+'" opacity=".85"/>';
-  s+='<path d="M58 118Q160 186 262 118Z" fill="#2c2830" stroke="'+C+'" stroke-opacity=".55" stroke-width="1.2"/><path d="M262 118h36" stroke="#3a343b" stroke-width="6" stroke-linecap="round"/>';
-  s+='<g class="a-toss"><g fill="'+A+'" opacity=".75"><circle cx="128" cy="126" r="5"/><circle cx="146" cy="130" r="4"/><circle cx="170" cy="128" r="5"/><circle cx="190" cy="125" r="4"/></g><g fill="'+O+'" opacity=".7"><circle cx="158" cy="124" r="3"/><circle cx="182" cy="132" r="3"/></g></g>';
-  s+='<g class="a-stir"><path d="M232 52L176 124" stroke="'+C+'" stroke-opacity=".75" stroke-width="3.5" stroke-linecap="round"/><path d="M170 118l16 12-8 6-14-10z" fill="'+C+'" opacity=".6"/></g>';
-  s+='<path d="M320 18Q280 30 246 44" stroke="#0e0d11" stroke-width="22" stroke-linecap="round" fill="none"/><ellipse cx="238" cy="50" rx="13" ry="10" fill="#0e0d11"/>';
-  s+='<g fill="none" stroke="'+C+'" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"><path class="a-steam" style="--dl:0s" d="M120 108q-10-14 0-26t0-26"/><path class="a-steam" style="--dl:-1.1s" d="M150 104q-10-14 0-26t0-26"/><path class="a-steam" style="--dl:-2.2s" d="M196 106q-10-14 0-26t0-24"/></g>';
+ function(){ // 04 近景 烹調：火焰跳動、鍋鏟翻炒、蒸氣與火星上升
+  var s='<rect width="320" height="180" fill="#100e13"/>'+bokeh(41,7,0,320,0,70,6,16);
+  s+='<ellipse class="a-breath" cx="160" cy="174" rx="176" ry="54" fill="url(#glow)" opacity=".9"/>';
+  [[102,16,24,.7],[126,18,32,.9],[151,20,38,.6],[177,18,32,.8],[202,16,24,.65]].forEach(function(f){s+='<path class="a-flame" style="--du:'+f[3]+'s" d="M'+f[0]+' 174q'+(f[1]/2)+'-'+f[2]+' '+f[1]+' 0z" fill="'+O+'"/>'});
+  [[131,10,17,.6],[156,12,22,.75],[182,10,17,.55]].forEach(function(f){s+='<path class="a-flame" style="--du:'+f[3]+'s" d="M'+f[0]+' 174q'+(f[1]/2)+'-'+f[2]+' '+f[1]+' 0z" fill="#FFDD93"/>'});
+  s+='<path d="M48 110C66 172 254 172 272 110Z" fill="url(#wokGrad)"/><path d="M86 150C122 166 198 166 234 150" fill="none" stroke="'+O+'" stroke-width="2.4" stroke-opacity=".8" stroke-linecap="round"/>';
+  s+='<path d="M50 108L16 98" stroke="#1c181d" stroke-width="7" stroke-linecap="round"/>';
+  s+='<ellipse cx="160" cy="110" rx="112" ry="12" fill="#2c262c" stroke="'+C+'" stroke-opacity=".45"/><ellipse cx="160" cy="111.5" rx="103" ry="9" fill="#151216"/>';
+  var fd='';[[112,108,12,5,-12,A],[130,112,10,5,8,O],[146,106,13,5,-4,'#F1D59B'],[163,112,11,5,14,A],[180,107,12,5,-9,O],[196,111,10,5,6,'#F1D59B'],[154,100,9,4,20,O],[176,99,9,4,-18,A]].forEach(function(f){fd+='<rect x="'+f[0]+'" y="'+f[1]+'" width="'+f[2]+'" height="'+f[3]+'" rx="2.4" fill="'+f[5]+'" transform="rotate('+f[4]+' '+(f[0]+f[2]/2)+' '+(f[1]+f[3]/2)+')"/>'});
+  s+='<g class="a-toss">'+fd+'</g>';
+  s+='<g fill="none" stroke="'+C+'" stroke-opacity=".16" stroke-width="7" stroke-linecap="round"><path class="a-steam" style="--dl:0s" d="M112 94q-12-16 0-30t0-30"/><path class="a-steam" style="--dl:-1.1s" d="M150 90q-12-16 0-30t0-30"/><path class="a-steam" style="--dl:-2.2s" d="M192 94q-12-16 0-30t0-28"/></g>';
+  [[120,150,3,0],[146,156,-4,-.6],[170,152,5,-1.2],[196,150,-3,-1.7],[158,148,2,-.9]].forEach(function(p){s+='<circle class="a-spark" style="--dl:'+p[3]+'s;--tx:'+p[2]+'px" cx="'+p[0]+'" cy="'+p[1]+'" r="1.3" fill="#FFDD93"/>'});
+  s+='<g class="a-stir"><path d="M240 44L180 106" stroke="#1d191e" stroke-width="5" stroke-linecap="round"/><path d="M240 44L180 106" stroke="'+C+'" stroke-opacity=".35" stroke-width="1"/><path d="M172 100l18 14-9 7-17-12z" fill="'+C+'" opacity=".8"/></g>';
+  s+='<path d="M320-6L332 30L250 58L232 34Z" fill="#0d0b10"/><circle cx="242" cy="46" r="13" fill="#0d0b10"/><path d="M238 59L300 38" stroke="'+O+'" stroke-opacity=".6" stroke-width="1.6" stroke-linecap="round"/>';
   return s;},
- function(){ // 05 全景 顧客穿梭：人群走動、串燈閃爍
-  var s='<rect width="320" height="180" fill="url(#skyNight)"/><rect y="118" width="320" height="62" fill="#1a171c"/><path d="M110 180L154 104H166L210 180Z" fill="#221f25"/>';
-  for(var i=0;i<5;i++){var x=4+i*20,y=58+i*9,w=26-i*3,h=60-i*10;
-    s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#26222a"/><rect x="'+x+'" y="'+(y+h*.35)+'" width="'+w+'" height="'+(h*.3)+'" fill="'+A+'" opacity="'+(.55-i*.07)+'"/>';
-    s+='<rect x="'+(316-x-w)+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="#26222a"/><rect x="'+(316-x-w)+'" y="'+(y+h*.35)+'" width="'+w+'" height="'+(h*.3)+'" fill="'+O+'" opacity="'+(.5-i*.07)+'"/>';}
-  s+=lights(0,320,40,10,14,1.3,.9);
-  var r=rng(5),q=rng(77);for(var j=0;j<16;j++){var d=r(),px=70+r()*180,py=112+d*56,dir=q()>.5?1:-1;
-    s+='<g class="a-stroll" style="--dx:'+(dir*(3+d*7)).toFixed(1)+'px;--du:'+(2.6+q()*2.6).toFixed(1)+'s;--dl:-'+(q()*3).toFixed(1)+'s">'+person(px.toFixed(1),py.toFixed(1),(.35+d*.6).toFixed(2),'#0a090d')+'</g>';}
+ function(){ // 05 全景 顧客穿梭：一點透視的攤位走道、人群走動
+  var s='<rect width="320" height="180" fill="url(#skyNight)"/><rect y="100" width="320" height="80" fill="#121015"/>';
+  s+='<path d="M48 180L157 100h6L272 180Z" fill="url(#roadSheen)" opacity=".85"/><circle class="a-breath" cx="160" cy="100" r="54" fill="url(#glow)" opacity=".85"/>';
+  var cols=[[O,C],[A,C],[O,'#F1D59B']];
+  s+=rows(160,100,74,100,2,TS,function(k,side){var c=cols[(k+side)%3];return {lit:1,vendor:(k+side)%2==0,c1:c[0],c2:c[1]}});
+  TS.forEach(function(t){s+=lights(160-100*t,160+100*t,100-46*t,5*t,8,Math.max(.5,1.5*t),.95)});
+  s+='<rect y="78" width="320" height="56" fill="url(#hazeH)" opacity=".55"/>';
+  var r=rng(5),q=rng(77),ps=[];for(var j=0;j<15;j++){var d=r(),t=.16+.84*d;ps.push([t,160+(r()*2-1)*100*t*.78,q()>.5?1:-1,q(),q(),q()>.4])}
+  ps.sort(function(a,b){return a[0]-b[0]});
+  ps.forEach(function(p){var t=p[0];s+='<g class="a-stroll" style="--dx:'+(p[2]*(2+t*7)).toFixed(1)+'px;--du:'+(2.6+p[3]*2.6).toFixed(1)+'s;--dl:-'+(p[4]*3).toFixed(1)+'s">'+person(p[1].toFixed(1),(100+74*t).toFixed(1),(1.45*t).toFixed(2),'#09080c',null,p[5],t>.4)+'</g>'});
   return s;},
- function(){ // 06 特寫 交易雙手：袋子遞出、零錢遞回
-  var s='<rect width="320" height="180" fill="#16141a"/><circle class="a-breath" cx="160" cy="92" r="110" fill="url(#glow)" opacity=".35"/>';
-  s+='<path d="M0 104Q60 96 112 100" stroke="#3a3036" stroke-width="30" stroke-linecap="round" fill="none"/><path d="M104 86q26-6 40 6q4 8-4 12q-14 6-36 8z" fill="#7a5a48"/><path d="M118 88q10-10 22-6" stroke="#5e4436" stroke-width="5" stroke-linecap="round" fill="none"/>';
-  s+='<g class="a-reach"><path d="M320 96Q262 104 214 98" stroke="#2c2730" stroke-width="30" stroke-linecap="round" fill="none"/><path d="M222 84q-30-4-44 8q-4 8 4 12q16 6 40 6z" fill="#8a6650"/></g>';
-  s+='<g class="a-pass"><rect x="150" y="62" width="30" height="34" rx="3" fill="'+C+'" opacity=".82"/><path d="M156 62q9-14 18 0" stroke="'+C+'" stroke-opacity=".8" stroke-width="2" fill="none"/></g>';
-  s+='<g class="a-coin" fill="'+A+'"><circle cx="186" cy="110" r="5"/><circle cx="194" cy="114" r="5" opacity=".8"/></g>';
-  s+='<rect x="0" y="146" width="320" height="34" fill="#0e0d11" opacity=".7"/>';
+ function(){ // 06 中景 攤販把餐點遞給顧客：隔著攤位遞出餐點、顧客伸手接
+  var s='<rect width="320" height="180" fill="url(#skyNight)"/>'+bokeh(61,8,200,320,0,120,7,18,true),k;
+  s+='<rect x="0" y="24" width="206" height="92" fill="url(#stallLit)" opacity=".9"/><rect x="0" y="24" width="206" height="92" fill="url(#hazeH)"/>';
+  s+='<circle class="a-breath" cx="120" cy="52" r="70" fill="url(#glow)" opacity=".75"/>';
+  s+='<rect width="226" height="26" fill="#221a1d"/>';
+  for(k=0;k<12;k++)s+='<rect x="'+k*19+'" width="19" height="26" fill="'+(k%2?C:O)+'" opacity="'+(k%2?.75:.92)+'"/>';
+  s+='<path d="M0 26';for(k=0;k<12;k++)s+='q9.5 9 19 0';s+='V22H0Z" fill="#B55F2C"/>';
+  s+='<rect x="204" width="6" height="180" fill="#0c0a0e"/>';
+  s+='<path d="M120 30V42" stroke="#0c0a0e" stroke-width="1.2"/><rect x="117" y="40" width="6" height="5" fill="#2a2429"/><circle cx="120" cy="50" r="5.5" fill="#FFF6DC"/>';
+  s+='<g fill="#0d0b10"><path d="M66 116C66 96 72 86 84 83L104 83C116 86 122 96 122 116Z"/><circle cx="94" cy="66" r="13"/><path d="M80 61Q94 47 108 61L112 64H78Z"/></g>';
+  s+='<rect y="116" width="214" height="64" fill="#17131a"/><rect y="112" width="214" height="6" fill="url(#steel)"/><rect y="112" width="214" height="1.2" fill="'+A+'" opacity=".8"/>';
+  for(k=1;k<6;k++)s+='<path d="M'+k*38+' 120V180" stroke="#100d12" stroke-width="1"/>';
+  s+='<g fill="#2a2227" stroke="'+A+'" stroke-opacity=".45" stroke-width=".7"><rect x="14" y="102" width="40" height="10" rx="2"/><rect x="16" y="92" width="36" height="10" rx="2"/><path d="M18 92q16-11 32 0z"/></g>';
+  s+='<g fill="none" stroke="'+C+'" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"><path class="a-steam" style="--dl:0s" d="M28 82q-8-10 0-20t0-18"/><path class="a-steam" style="--dl:-1.6s" d="M42 80q-8-10 0-20t0-18"/></g>';
+  s+='<g class="a-give"><path d="M114 92L170 98" stroke="#0d0b10" stroke-width="10" stroke-linecap="round"/><circle cx="172" cy="98" r="6.5" fill="#0d0b10"/><path d="M168 103l4 12M176 103l4 12" stroke="'+C+'" stroke-opacity=".8" stroke-width="1.2"/><path d="M162 115h28l3 28q-17 6-34 0z" fill="'+C+'"/><path d="M168 115l-1 30M176 115v32M184 115l1 30" stroke="'+O+'" stroke-width="2.6" stroke-opacity=".85"/></g>';
+  s+='<g class="a-reach"><path d="M240 104L204 104" stroke="#060508" stroke-width="11" stroke-linecap="round"/><path d="M240 99L204 99" stroke="'+A+'" stroke-opacity=".6" stroke-width="1" stroke-linecap="round"/><circle cx="202" cy="104" r="6.5" fill="#060508"/></g>';
+  s+='<g fill="#060508" stroke="'+A+'" stroke-opacity=".65" stroke-width="1.4" paint-order="stroke"><path d="M224 180C224 124 228 96 244 88L268 88C286 96 292 124 294 180Z"/><circle cx="256" cy="64" r="15"/></g>';
   return s;},
- function(){ // 07 遠景 熱鬧人群燈火：光斑呼吸、人潮晃動
-  var s='<rect width="320" height="180" fill="url(#skyNight)"/>';
-  s+='<path d="M0 70h40v-14h30v20h40v-10h50v14h40v-20h44v12h76v110H0Z" fill="#141217"/>';
-  var r=rng(11),q=rng(91);for(var i=0;i<46;i++){var x=r()*320,y=60+r()*70,rr=2+r()*7;s+='<circle class="a-bk" style="--dl:-'+(q()*4).toFixed(1)+'s;--du:'+(1.8+q()*2.6).toFixed(1)+'s" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+rr.toFixed(1)+'" fill="'+(r()>.5?A:O)+'" opacity="'+(.15+r()*.5).toFixed(2)+'"/>';}
-  s+=lights(0,320,52,8,18,1.2,.95)+lights(0,320,76,6,22,1,.7);
-  var r2=rng(3),g1='',g2='';for(var j=0;j<34;j++){var px=r2()*330-5,py=150+r2()*30,pp=person(px.toFixed(1),py.toFixed(1),(.9+r2()*.5).toFixed(2),'#08070a');if(j%2)g1+=pp;else g2+=pp;}
-  s+='<g class="a-crowd">'+g1+'</g><g class="a-crowd b2">'+g2+'</g>';
+ function(){ // 07 遠景 熱鬧人群與燈火：招牌、攤位、三層人潮、前景光斑
+  var s='<rect width="320" height="180" fill="url(#skyNight)"/><ellipse class="a-breath" cx="160" cy="104" rx="210" ry="80" fill="url(#glow)" opacity=".65"/>',k;
+  [[14,34,16,46,A],[40,52,26,14,C],[78,30,14,52,O],[104,56,30,12,A],[150,26,18,58,C],[186,50,28,14,O],[228,32,15,50,A],[254,58,26,12,C],[292,36,16,48,O]].forEach(function(g,k){
+    s+='<g'+(k%4==1?' class="a-flick"':'')+'><rect x="'+g[0]+'" y="'+g[1]+'" width="'+g[2]+'" height="'+g[3]+'" rx="1.5" fill="'+g[4]+'" opacity=".82"/><rect x="'+g[0]+'" y="'+g[1]+'" width="'+g[2]+'" height="'+g[3]+'" rx="1.5" fill="none" stroke="#120e12" stroke-width="1.2"/></g>'});
+  for(k=0;k<8;k++)s+='<g transform="translate('+(-14+k*44)+' 132) scale(.72)">'+stall({lit:1,vendor:k%2,c1:k%2?A:O})+'</g>';
+  [[60,84],[170,80],[262,86]].forEach(function(p,k){s+='<g opacity=".16" filter="url(#bl3)"><ellipse class="a-puff" style="--dl:-'+(k*1.6)+'s" cx="'+p[0]+'" cy="'+p[1]+'" rx="17" ry="11" fill="'+C+'"/></g>'});
+  s+=lights(0,320,20,7,16,1.3,.95)+lights(0,320,42,6,20,1.1,.85)+lights(-10,330,62,5,24,.9,.7);
+  s+='<rect y="96" width="320" height="52" fill="url(#hazeH)" opacity=".9"/>';
+  var r=rng(3),g1='',g2='',g3='',j;
+  for(j=0;j<24;j++)g1+=person((j*14-4+r()*8).toFixed(1),(147+r()*4).toFixed(1),(.5+r()*.08).toFixed(2),'#0f0b10');
+  for(j=0;j<15;j++)g2+=person((j*23-6+r()*10).toFixed(1),(167+r()*5).toFixed(1),(.82+r()*.1).toFixed(2),'#09070b',null,false,true);
+  for(j=0;j<9;j++)g3+=person((j*40-4+r()*14).toFixed(1),(208+r()*8).toFixed(1),(1.5+r()*.2).toFixed(2),'#050406',null,false,true);
+  s+='<g class="a-crowd">'+g1+'</g><g class="a-crowd b2">'+g2+'</g><g class="a-crowd">'+g3+'</g>'+bokeh(91,9,0,320,0,120,8,20,true);
   return s;},
- function(){ // 08 遠景 回望：鏡頭緩緩拉遠、遠方燈火閃爍
-  var s='<g class="a-pull"><rect width="320" height="180" fill="url(#skyNight)"/>';
-  var r=rng(17);for(var i=0;i<24;i++)s+='<circle class="a-star" style="--dl:-'+(r()*3).toFixed(1)+'s" cx="'+(r()*320).toFixed(1)+'" cy="'+(r()*70).toFixed(1)+'" r=".6" fill="'+C+'" opacity="'+(.2+r()*.5).toFixed(2)+'"/>';
-  s+='<path d="M0 108h60v-8h40v6h50v-4h120v6h50v72H0Z" fill="#0f0e12"/>';
-  s+='<ellipse class="a-breath" cx="206" cy="108" rx="54" ry="16" fill="url(#glow)" opacity=".85"/>';
-  for(var j=0;j<14;j++)s+='<circle class="a-star" style="--dl:-'+(r()*3).toFixed(1)+'s" cx="'+(184+r()*44).toFixed(1)+'" cy="'+(102+r()*10).toFixed(1)+'" r="'+(.8+r()*1.2).toFixed(1)+'" fill="#FFE2A3" opacity="'+(.5+r()*.5).toFixed(2)+'"/>';
-  s+='<path d="M90 180L200 110H212L250 180Z" fill="#1c1a20"/><path d="M206 112L170 180" stroke="'+C+'" stroke-opacity=".18" stroke-dasharray="5 6"/>';
-  s+='<rect x="40" y="40" width="3" height="140" fill="#08070a"/><path d="M41 42h18" stroke="#08070a" stroke-width="3"/><circle cx="58" cy="46" r="3" fill="'+A+'" opacity=".5"/></g>';
+ function(){ // 08 遠景 回望：鏡頭緩緩拉遠、遠方燈火映在路面
+  var s='<g class="a-pull"><rect width="320" height="180" fill="url(#skyNight)"/>',r=rng(17),j;
+  for(j=0;j<30;j++)s+='<circle class="a-star" style="--dl:-'+(r()*3).toFixed(1)+'s" cx="'+(r()*320).toFixed(1)+'" cy="'+(r()*72).toFixed(1)+'" r="'+(.4+r()*.5).toFixed(1)+'" fill="'+C+'" opacity="'+(.25+r()*.5).toFixed(2)+'"/>';
+  s+='<ellipse class="a-breath" cx="196" cy="104" rx="132" ry="54" fill="url(#glow)" opacity=".75"/>';
+  s+='<path d="M0 106V98h30v-5h22v7h26v-4h18v-6l8-5 8 5v6h14v4h10q6-9 14-9t14 9h8v-5h26v7h30v-6h24v8h30v-4H320V106Z" fill="#0c0a0e"/>';
+  for(j=0;j<10;j++)s+='<rect x="'+(142+j*11)+'" y="103.4" width="7" height="1.7" fill="'+(j%2?C:O)+'" opacity=".85"/>';
+  for(j=0;j<28;j++)s+='<circle class="a-star" style="--dl:-'+(r()*3).toFixed(1)+'s" cx="'+(140+r()*112).toFixed(1)+'" cy="'+(99.5+r()*4).toFixed(1)+'" r="'+(.7+r()*1.1).toFixed(1)+'" fill="#FFE2A3" opacity="'+(.5+r()*.5).toFixed(2)+'"/>';
+  s+='<rect y="106" width="320" height="74" fill="#09080c"/><path d="M92 180L190 106h8L240 180Z" fill="#131116"/><path d="M130 180L191 106h6L206 180Z" fill="url(#roadGlow)"/>';
+  s+='<path d="M194 108L168 180" stroke="'+C+'" stroke-opacity=".2" stroke-dasharray="5 7"/>';
+  s+='<path d="M46 16Q180 58 320 30M46 24Q180 68 320 42" fill="none" stroke="#050406" stroke-width=".8"/>';
+  s+='<rect x="44" y="10" width="4" height="170" fill="#050406"/><rect x="34" y="16" width="24" height="2.4" fill="#050406"/><rect x="36" y="24" width="20" height="2" fill="#050406"/>';
+  s+='<path d="M48 44h22" stroke="#050406" stroke-width="2.4"/><path d="M70 46L52 180H112Z" fill="'+A+'" opacity=".05"/><circle cx="70" cy="47" r="14" fill="url(#glowSoft)"/><circle cx="70" cy="46" r="2.4" fill="#FFE2A3"/>';
+  s+='<path d="M0 180V150q14-10 26 0q10-8 20 2q8 6 4 28ZM320 180V156q-12-10-24-2q-12-6-18 6q-8 8-2 20Z" fill="#050406"/></g>';
   return s;}
 ];
 function shotSvg(i){return frame(draw[i](),shots[i].t)}
@@ -780,10 +873,10 @@ shots.forEach(function(sh,i){
 function pad(n){return (n<10?'0':'')+n}
 
 /* ---------- 鏡頭示意 ---------- */
-var lensDefs=[['遠景','01・07・08',.32],['全景','05',.62],['中景','02',1.25],['近景','04',2.1],['特寫','03・06',4.2]];
+var lensDefs=[['遠景','01・07・08',.25],['全景','05',.5],['中景','02・06',1.3],['近景','04',1.75],['特寫','03',3.3]];
 $('#lensRow').innerHTML=lensDefs.map(function(l){
-  var sc=l[2],y=80+sc*14;
-  var svg='<svg viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="#1d1a20"/><rect y="70" width="160" height="30" fill="#151318"/><circle cx="120" cy="30" r="40" fill="url(#glowSoft)"/>'+person(80,y,sc,'#0b0a0e')+(sc<1?person(46,82,.3,'#0b0a0e')+person(112,86,.36,'#0b0a0e'):'')+'</svg>';
+  var sc=l[2],y=80+sc*18;
+  var svg='<svg viewBox="0 0 160 100" aria-hidden="true"><rect width="160" height="100" fill="url(#skyNight)"/><rect y="72" width="160" height="28" fill="#121015"/><circle cx="118" cy="40" r="46" fill="url(#glow)" opacity=".7"/>'+(sc<1?'<g transform="translate(96 84) scale('+(sc*1.5)+')">'+stall({lit:1,vendor:1})+'</g>'+person(52,86,sc*.9,'#0b0a0e',null,true)+person(128,90,sc*1.1,'#0b0a0e'):'')+person(80,y,sc,'#0b0a0e',null,false,true)+'<rect width="160" height="100" fill="url(#vig)"/></svg>';
   return '<div class="lensc pv" tabindex="0" data-pv>'+svg+'<b>'+l[0]+'</b><small>分鏡 '+l[1]+'</small></div>';
 }).join('');
 
@@ -793,8 +886,10 @@ $('#lensRow').innerHTML=lensDefs.map(function(l){
   s+='<g stroke="#F4EBDD" stroke-opacity=".07" fill="none">';
   for(var i=0;i<9;i++){s+='<line x1="1180" y1="500" x2="'+(1600*i/8 - 200)+'" y2="900"/>';}
   s+='</g>';
-  for(var k=0;k<7;k++){var x=760+k*58,h=220-k*22,y=500-h*.6;
-    s+='<rect x="'+(1180-(1180-x)*.9)+'" y="'+y+'" width="'+(40-k*4)+'" height="'+h+'" fill="#17151b"/><rect x="'+(1180+(1180-x)*.9-(40-k*4))+'" y="'+y+'" width="'+(40-k*4)+'" height="'+h+'" fill="#17151b"/>';}
+  s+='<path d="M700 900L1168 500h24L1660 900Z" fill="url(#roadSheen)" opacity=".5"/><circle cx="1180" cy="500" r="210" fill="url(#glow)" opacity=".55"/>';
+  s+=rows(1180,500,330,380,7,[.12,.18,.27,.4],function(k,side){return {lit:.85,vendor:(k+side)%2==0,c1:(k+side)%2?A:O}});
+  [.6,.9].forEach(function(t,k){var sc=7*t;s+='<g transform="translate('+(1180+380*t+60*sc).toFixed(1)+' '+(500+330*t).toFixed(1)+') scale('+(-sc).toFixed(3)+' '+sc.toFixed(3)+')">'+stall({lit:.85,vendor:k==0,c1:k?O:A})+'</g>'});
+  s+='<rect x="0" y="380" width="1600" height="240" fill="url(#hazeH)" opacity=".5"/>';
   s+=lights(700,1600,360,40,26,3,.75,0).replace(/stroke-width=".6"/,'stroke-width="1.2"');
   s+=lights(820,1560,430,22,20,2.2,.55,6);
   $('#coverSvg').innerHTML=s;
@@ -806,17 +901,18 @@ $('#lensRow').innerHTML=lensDefs.map(function(l){
 /* ---------- 創作理念：街道對比 ---------- */
 function street(lit){
   var s='<rect width="600" height="380" fill="'+(lit?'url(#skyNight)':'url(#skyDay)')+'"/>';
-  s+='<rect y="230" width="600" height="150" fill="'+(lit?'#17151a':'#6b6862')+'"/><path d="M220 380L290 228H310L380 380Z" fill="'+(lit?'#201d23':'#7d7a73')+'"/>';
-  s+='<path d="M0 60L200 130V250L0 320Z" fill="'+(lit?'#1b191f':'#4c4b50')+'"/><path d="M600 60L400 130V250L600 320Z" fill="'+(lit?'#1b191f':'#4c4b50')+'"/>';
-  for(var i=0;i<5;i++){var x=20+i*36,y=150+i*12,w=46-i*6,h=100-i*14;
-    [[x,1],[580-x-w,-1]].forEach(function(p){
-      s+='<rect x="'+p[0]+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+(lit?'#29242b':'#5d5b5f')+'"/>';
-      if(lit){s+='<rect x="'+p[0]+'" y="'+(y+h*.3)+'" width="'+w+'" height="'+(h*.4)+'" fill="'+(p[1]>0?A:O)+'" opacity="'+(.75-i*.1)+'"/><rect x="'+(p[0]-4)+'" y="'+(y-6)+'" width="'+(w+8)+'" height="8" fill="#3a2a22" stroke="'+A+'" stroke-opacity=".6"/>';}
-      else{for(var k=1;k<6;k++)s+='<line x1="'+p[0]+'" y1="'+(y+h*k/6)+'" x2="'+(p[0]+w)+'" y2="'+(y+h*k/6)+'" stroke="#3f3e42" stroke-width="1.2"/>';}
-    });}
-  if(lit){s+='<ellipse cx="300" cy="240" rx="260" ry="90" fill="url(#glow)" opacity=".45"/>'+lights(0,600,90,22,26,2,.95,0)+lights(0,600,130,14,30,1.6,.75,4);
-    var r=rng(9);for(var j=0;j<26;j++){var d=r();s+=person((130+r()*340).toFixed(1),(250+d*120).toFixed(1),(.7+d*1.4).toFixed(2),'#08070a');}}
-  else{s+=person(330,300,1.3,'#3b3a3e')+'<line x1="40" y1="60" x2="560" y2="60" stroke="#55545a" stroke-width="1.5"/>';}
+  s+='<path d="M0 200V120h60v-30h50v40h40v-24h44v50h40v-20h36v26h60v-22h40v18h44v-46h40v30h50v-36H600V200Z" fill="'+(lit?'#141118':'#7b7a7e')+'"/>';
+  s+='<rect y="196" width="600" height="184" fill="'+(lit?'#121015':'#8a8782')+'"/>';
+  s+='<path d="M110 380L294 196h12L490 380Z" fill="'+(lit?'url(#roadSheen)':'#9b978f')+'"'+(lit?' opacity=".85"':'')+'/>';
+  if(lit)s+='<circle cx="300" cy="196" r="120" fill="url(#glow)" opacity=".8"/>';
+  else s+='<path d="M300 200L300 380" stroke="#b5b1a9" stroke-width="2" stroke-dasharray="14 16"/><path d="M0 70Q300 130 600 60M0 86Q300 144 600 78" fill="none" stroke="#55545a" stroke-width="1.2"/>';
+  s+=rows(300,196,150,170,3.4,TS,function(k,side){return lit?{lit:1,vendor:(k+side)%2==0,c1:(k+side)%2?A:O}:{day:1}});
+  if(lit){TS.forEach(function(t,k){s+=lights(300-170*t,300+170*t,196-54*t,10*t,8,Math.max(1,3*t),.95,k*3)});
+    s+='<rect y="150" width="600" height="110" fill="url(#hazeH)" opacity=".55"/>';
+    var r=rng(9),ps=[];for(var j=0;j<22;j++){var d=r(),t=.2+.8*d;ps.push([t,300+(r()*2-1)*170*t*.8,r()>.4])}
+    ps.sort(function(a,b){return a[0]-b[0]});
+    ps.forEach(function(p){s+=person(p[1].toFixed(1),(196+150*p[0]).toFixed(1),(3.1*p[0]).toFixed(2),'#08070a',null,p[2],p[0]>.4)});}
+  else s+=person(338,300,2.1,'#4b4a4f');
   return s;
 }
 $('#streetPlain').innerHTML=street(false);$('#streetLit').innerHTML=street(true);
