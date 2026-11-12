@@ -46,7 +46,6 @@ button{font:inherit;color:inherit}
 .tbtn:disabled{opacity:.35;cursor:not-allowed}
 .tbtn svg{width:16px;height:16px}
 .fsval{min-width:52px;color:var(--muted)}
-.timehint{font-size:12px;color:var(--muted);white-space:nowrap}
 .help{position:fixed;top:calc(var(--top) + 6px);right:16px;z-index:55;width:min(320px,calc(100vw - 32px));background:#1c1b21;border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:13px;box-shadow:0 20px 50px rgba(0,0,0,.6);display:none}
 .help.open{display:block}
 .help h2{font-size:14px;margin:0 0 8px;color:var(--amber);letter-spacing:.1em}
@@ -259,7 +258,7 @@ h2.title{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1
   .tl-line::after{display:none}
   .stage::before{top:1.7rem;left:-1.75rem}
   .lens-row{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .brand span,.timehint{display:none}
+  .brand span{display:none}
   .navbtn .lbl{display:none}.navbtn{padding:0 12px}
   .dot{width:30px}.dot::after{left:7px;right:7px}
   .counter{display:none}
@@ -292,7 +291,6 @@ h2.title{font-family:var(--serif);font-weight:600;font-size:2.5rem;line-height:1
 
 <header class="topbar">
   <div class="brand"><b>燈火之間</b><span>　敘事攝影｜期中企劃</span></div>
-  <span class="timehint" id="timehint" aria-live="polite"></span>
   <div class="tools" role="toolbar" aria-label="簡報工具">
     <button class="tbtn" id="fsDown" aria-label="縮小字體" title="縮小字體（-）">A−</button>
     <button class="tbtn fsval" id="fsReset" aria-label="重設字體大小" title="重設字體大小（0）">100%</button>
@@ -749,7 +747,6 @@ function go(n){
   $('#counter').textContent=pad(n+1)+' / '+pad(N);
   $('#prog').style.width=((n+1)/N*100)+'%';
   $('#prevBtn').disabled=n===0;$('#nextBtn').disabled=n===N-1;
-  $('#timehint').textContent='建議時長 '+slides[n].getAttribute('data-time');
   document.title=slides[n].getAttribute('data-title')+'｜燈火之間｜期中企劃';
   try{history.replaceState(null,'','#'+(n+1))}catch(e){}
 }
